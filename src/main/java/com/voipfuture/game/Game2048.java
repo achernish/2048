@@ -62,8 +62,8 @@ public class Game2048 {
         }
     }
 
-    private Tile getTileAt(int i, int j) {
-        return myTiles[i + j * mySizeOfBoard];
+    public Tile getTileAt(int x, int y) {
+        return myTiles[x + y * mySizeOfBoard];
     }
 
     private Tile[] getTilesInLine(int index) {
@@ -243,10 +243,6 @@ public class Game2048 {
         return mySizeOfBoard;
     }
 
-    public void setMySizeOfBoard(int mySizeOfBoard) {
-        this.mySizeOfBoard = mySizeOfBoard;
-    }
-
     public boolean isMyWin() {
         return myWin;
     }
@@ -260,44 +256,5 @@ public class Game2048 {
     }
 
     public static void main(String []args) {
-        Game2048 game2048 = new Game2048(4);
-
-
-        Tile tile11 = new Tile(2);
-        Tile tile12 = new Tile(0);
-        Tile tile13 = new Tile(2);
-        Tile tile14 = new Tile(0);
-
-        Tile tile21 = new Tile(2);
-        Tile tile22 = new Tile(0);
-        Tile tile23 = new Tile(0);
-        Tile tile24 = new Tile(0);
-
-        Tile tile31 = new Tile(8);
-        Tile tile32 = new Tile(2);
-        Tile tile33 = new Tile(0);
-        Tile tile34 = new Tile(0);
-
-        Tile tile41 = new Tile(8);
-        Tile tile42 = new Tile(2);
-        Tile tile43 = new Tile(0);
-        Tile tile44 = new Tile(0);
-
-        Tile[]testTiles = new Tile[4 * 4];
-        testTiles[0] = tile11; testTiles[1] = tile12; testTiles[2] = tile13; testTiles[3] = tile14;
-        testTiles[4] = tile21; testTiles[5] = tile22; testTiles[6] = tile23; testTiles[7] = tile24;
-        testTiles[8] = tile31; testTiles[9] = tile32; testTiles[10] = tile33; testTiles[11] = tile34;
-        testTiles[12] = tile41; testTiles[13] = tile42; testTiles[14] = tile43; testTiles[15] = tile44;
-
-        game2048.setMyTiles(testTiles);
-        game2048.print();
-
-        //game2048.moveLeft();
-        //game2048.moveRight();
-        //game2048.moveUp();
-        game2048.moveDown();
-
-        System.out.println("");
-        game2048.print();
-    }
+   }
 }
