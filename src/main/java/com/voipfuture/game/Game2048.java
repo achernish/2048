@@ -3,6 +3,7 @@ package com.voipfuture.game;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * @author Anatoly Chernysh
@@ -11,13 +12,13 @@ public class Game2048 {
 
     public final static int TARGET_SCORE = 2048;
 
+    public final static int DEFAULT_BOARD_SIZE = 4;
+
     private Tile[] myTiles;
 
     private int mySizeOfBoard;
 
     private boolean myWin = false;
-
-    private boolean myLose = false;
 
     private int myScore = 0;
 
@@ -29,7 +30,6 @@ public class Game2048 {
     public void resetGame() {
         myScore = 0;
         myWin = false;
-        myLose = false;
         myTiles = new Tile[mySizeOfBoard * mySizeOfBoard];
         for (int i = 0; i < myTiles.length; i++) {
             myTiles[i] = new Tile();
@@ -229,6 +229,8 @@ public class Game2048 {
             }
             System.out.println();
         }
+        System.out.println("Score: " + myScore);
+        System.out.println();
     }
 
     public Tile[] getMyTiles() {
@@ -247,14 +249,52 @@ public class Game2048 {
         return myWin;
     }
 
-    public boolean isMyLose() {
-        return myLose;
-    }
-
     public int getMyScore() {
         return myScore;
     }
 
     public static void main(String []args) {
-   }
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter size of game's board (minimum size is 4): ");
+        String strSizeOfBoard = in.nextLine();
+
+        int sizeOfBoard = DEFAULT_BOARD_SIZE;
+        try {
+            sizeOfBoard = Integer.valueOf(strSizeOfBoard);
+        }
+        catch (Exception e) {
+        }
+
+        Game2048 myGame2048 = new Game2048(sizeOfBoard);
+        myGame2048.print();
+
+        while (true) {
+
+            if (!myGame2048.canMove()) {
+                System.out.println("You've just lost The Game.");
+                break;
+            }
+            if (myGame2048.isMyWin()) {
+                System.out.println("You've just won The Game.");
+                break;
+            }
+
+            System.out.print("Enter move using the keyboard keys 'a' (left) , 'd' (right) , 'w' (up) and 's' (down): ");
+            final String move = in.next();
+            if (move.equals("a")) {
+                myGame2048.moveLeft();
+            }
+            else if (move.equals("d")) {
+                myGame2048.moveRight();
+            }
+            else if (move.equals("w")) {
+                myGame2048.moveUp();
+            }
+            else if (move.equals("s")) {
+                myGame2048.moveDown();
+            }
+
+            myGame2048.print();
+        }
+    }
 }
